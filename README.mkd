@@ -16,3 +16,7 @@ This will split `subtitle.srt` into three parts, named `subtitle.srt.000`, `subt
     python srt.py shift subtitle.srt -,500 > new.subtitle.srt
 
 This will move the subtitle 500 milliseconds towards the beginning. Output is redirected to the file named `new.subtitle.srt`. Use this to sync subtitle with video. 
+
+    python srt.py prune subtitle.srt 1-4,34 > new.subtitle.srt
+
+This will remove subtitles numbered 1 to 4 and 34 from the file `subtitle.srt`. Output is redirected to the file named `new.subtitle.srt`.

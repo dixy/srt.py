@@ -194,10 +194,24 @@ def shift_cmd(*args):
         print(format(shift(parse(infile), TC(delta))))
 
 
+def prune_cmd(*args):
+    if len(args) != 2:
+        print 'Usage: prune input_file.srt 1-12,289'
+    else:
+        infile = args[0]
+        ranges = (r.split('-') for r in args[1].split(','))
+        blocks = [i for r in ranges for i in xrange(int(r[0]), int(r[-1]) + 1)]
+        segs   = parse(infile)
+        blocks = reversed(filter(lambda x: x <= len(segs), blocks))
+        for block in blocks:
+            del segs[block - 1]
+        print format(segs)
+
 
 def command_run(argv):
     cmds    = {'split': split_cmd, 
-               'shift': shift_cmd}
+               'shift': shift_cmd,
+               'prune': prune_cmd}
     if len(argv) > 1 and argv[1] in cmds:
         cmds[argv[1]](*argv[2:])
     else:
