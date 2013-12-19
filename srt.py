@@ -101,7 +101,7 @@ TC  = Timecode  # short alias for Timecode
 def parse(file):
     def parse_block(block):
         lines   = block.split('\n')
-        TIMECODE_SEP    = re.compile('[ \->]*')
+        TIMECODE_SEP    = re.compile('\s*-+>\s*')
         tc1, tc2= map(TC, TIMECODE_SEP.split(lines[1]))
         txt     = '\r\n'.join(lines[2:])
         return (tc1, tc2, txt)
